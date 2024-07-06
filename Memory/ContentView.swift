@@ -11,16 +11,20 @@ import SwiftUI
 
 
 struct ContentView: View {
-    let emojis: [String] = ["👻","🎃","🕷️","😈","💀","🕸️","🧙‍♀️","🙀","👹","😱","☠️","🍭"]
+    let emojisHalloween: [String] = ["👻","🎃","🕷️","😈","💀","🕸️","🧙‍♀️","🙀","👹","😱","☠️","🍭"]
+    let emojisMedieval: [String] = ["🤿","🚢","🐟","🦈","🐙","🪼","🪸","🐢","🐬","🐋","🐴","🐠"]
+    let emojisUnderwater: [String] = ["🛡️","🏰","🐉","🧙‍♂️","🧚‍♀️","🦄","🗡️","🛡️","👑","🧪","✨","💰"]
     
     @State var cardCount: Int = 4
 
     var body: some View {
         VStack{
+            Text("Memorize!").font(.title)
             ScrollView{
                 cards
             }
             Spacer()
+            carThemes
             cardCountAdjuster
 
         }
@@ -39,10 +43,33 @@ struct ContentView: View {
         }
     }
     
+    var carThemes: some View{
+        HStack{
+            Button(action:{
+                print("Hello")
+            },label:{
+                Text("👻")
+            })
+            Spacer()
+            Button(action:{
+                print("Hello")
+            },label:{
+                Text("🤿")
+            })
+            Spacer()
+            Button(action:{
+                print("Hello")
+            },label:{
+                Text("🛡️")
+            })
+        }
+        .padding()
+    }
+    
     var cards: some View{
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 120, maximum: 150))]) {
             ForEach(0..<cardCount, id: \.self) { index in
-                CardView(content: emojis[index], isFaceUp: true).aspectRatio(2/3, contentMode: .fit)
+                CardView(content: emojisHalloween[index], isFaceUp: true).aspectRatio(2/3, contentMode: .fit)
                     
             }
     }.foregroundColor(.orange)
@@ -54,7 +81,7 @@ struct ContentView: View {
         }, label:{
             Image(systemName: symbol)
         })
-        .disabled(cardCount + offset < 1 || cardCount + offset > emojis.count)
+        .disabled(cardCount + offset < 1 || cardCount + offset > emojisHalloween.count)
     }
     
     
@@ -66,9 +93,6 @@ struct ContentView: View {
         cardCountAdjuster(by: +1, symbol: "rectangle.stack.badge.plus.fill")
     }
     
-
-
-
     }
 
 
